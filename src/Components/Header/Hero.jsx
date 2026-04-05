@@ -1,4 +1,7 @@
 import React from 'react';
+import { AiFillFacebook } from 'react-icons/ai';
+import { FaInstagramSquare } from 'react-icons/fa';
+import { FaDiscord, FaPinterest } from 'react-icons/fa6';
 
 const Hero = () => {
   const cards = [
@@ -26,7 +29,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="min-h-screen bg-white dark:bg-zinc-950 text-gray-900 dark:text-zinc-100 py-10 md:py-14 relative transition-colors duration-300">
+    <section className=" bg-white dark:bg-zinc-950 text-gray-900 dark:text-zinc-100 py-10 md:py-14 relative transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         
         {/* ==================== LEFT SIDE - TEXT ==================== */}
@@ -55,20 +58,21 @@ const Hero = () => {
             </button>
           </div>
 
-          {/* Trust Stats */}
-          <div className="flex gap-8 pt-6 text-sm">
+          {/* Social Media */}
+          <div className="flex gap-10 pt-6 text-sm">
             <div>
-              <span className="font-semibold text-gray-900 dark:text-white">8,400+</span>
-              <p className="text-gray-500">Articles</p>
+              <span className="font-semibold text-gray-900 dark:text-white"><AiFillFacebook size={34} /></span>
+              <p className="text-gray-500">Facebook</p>
             </div>
             <div>
-              <span className="font-semibold text-gray-900 dark:text-white">42,000+</span>
-              <p className="text-gray-500">Readers</p>
+              <span className="font-semibold text-gray-900 dark:text-white"><FaPinterest size={34} /></span>
+              <p className="text-gray-500">Pinterest</p>
             </div>
             <div>
-              <span className="font-semibold text-gray-900 dark:text-white">Weekly</span>
-              <p className="text-gray-500">New Stories</p>
+              <span className="font-semibold text-gray-900 dark:text-white"><FaDiscord size={34} /></span>
+              <p className="text-gray-500">Discord</p>
             </div>
+           
           </div>
         </div>
 
@@ -95,22 +99,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator (Hidden on Mobile for cleaner look) */}
-      <div className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center text-gray-400 text-xs tracking-widest">
-        SCROLL TO EXPLORE
-        <div className="w-px h-12 bg-gradient-to-b from-transparent via-gray-400 to-transparent mt-3"></div>
-      </div>
-
-      {/* Custom CSS for hiding scrollbar */}
-      <style jsx>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   );
 };

@@ -2,16 +2,17 @@ import React from "react";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineSubscriptions } from "react-icons/md";
+import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
   return (
-    <div className="bg-white dark:bg-zinc-950 transition-colors duration-300">
+    <div className="bg-white dark:bg-zinc-950 transition-colors duration-300 sticky top-0 z-50 ">
       <div className="absolute top-0  -translate-x-1/2 w-full h-full opacity-10 dark:opacity-20 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-400 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-400 rounded-full blur-[120px]"></div>
       </div>
       <div className="mx-5 max-w-7xl lg:mx-auto">
-        <div className="navbar">
+        <div className="navbar ">
           <div className=" navbar-start flex-1 flex gap-4">
             <div className="dropdown sm:hidden ">
               <div
@@ -50,13 +51,13 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
-            <h1 className="text-2xl font-semibold">
+            <Link to="/" className="text-2xl font-semibold">
               <span>BLOG</span>
               <span className="font-light">IFY</span>
-            </h1>
+            </Link>
             {/* search bar */}
             <div className="">
-              <fieldset className="w-full space-y-1 bg-base-300 rounded-xl shadow-md">
+              <fieldset className="w-full space-y-1  rounded-xl bg-white dark:bg-zinc-900  shadow-sm border border-gray-300 dark:border-zinc-800">
                 <label htmlFor="Search" className="hidden">
                   Search
                 </label>
@@ -86,16 +87,19 @@ const Navbar = () => {
               </fieldset>
             </div>
           </div>
-          <div className="navbar-center">{/* empty */}</div>
+          <div className="navbar-center gap-5 "></div>
           <div className="navbar-end flex gap-5">
             <div className="md:flex items-center gap-5 hidden ">
               <button className="btn btn-neutral rounded-4xl flex gap-2 ">
                 <MdOutlineSubscriptions size={20} />
                 Go Premium
               </button>
-              <button className="flex items-center gap-2 text-lg text-gray-500">
+              <Link
+                to="/write"
+                className="flex items-center gap-2 text-lg text-gray-500"
+              >
                 <FaRegPenToSquare size={24} /> Write
-              </button>
+              </Link>
               <p>
                 <IoMdNotificationsOutline size={24} />
               </p>

@@ -6,3 +6,14 @@
   position: sticky;
   top: 0;
 }
+
+/* i*/
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

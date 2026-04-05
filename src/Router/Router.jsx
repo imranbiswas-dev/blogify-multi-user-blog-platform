@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router";
 import Layout from "../Layout/Layout";
-import App from "../App";
+import Home from "../Pages/Home";
+import Write from "../Pages/Write";
+import Blogs from "../Pages/Blogs";
 
 export const router = createBrowserRouter([
   {
@@ -10,12 +12,24 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: App,
+        loader: () => fetch("http://localhost:3000/blogs"),
+        Component: Home,
       },
-      //   {
-      //     path: "/about",
-      //     Component: About,
-      //   },
+      {
+        path: "/write",
+        Component: Write,
+      },
+      {
+        path: "/blogs",
+        loader: async () => {
+          const response = await fetch("http://localhost:3000/blogs");
+          console.log("Response status:", response.status); // 200 expected
+          const data = await response.json();
+          console.log("Loader data:", data); // check
+          return data;
+        },
+        Component: Blogs,
+      },
     ],
   },
 ]);
