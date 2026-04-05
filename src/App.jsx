@@ -1,11 +1,12 @@
-import "./App.css";
+import React from "react";
+import Hero from "./Components/Header/Hero";
 
-function App() {
+const App = () => {
   return (
     <div>
-      <p>Hello, Vite + React!</p>
+      <Hero />
     </div>
   );
-}
+};
 
 export default App;

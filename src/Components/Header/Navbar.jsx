@@ -5,17 +5,58 @@ import { MdOutlineSubscriptions } from "react-icons/md";
 
 const Navbar = () => {
   return (
-    <div className="bg-base-100 shadow-sm">
+    <div className="bg-white dark:bg-zinc-950 transition-colors duration-300">
+      <div className="absolute top-0  -translate-x-1/2 w-full h-full opacity-10 dark:opacity-20 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-400 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-400 rounded-full blur-[120px]"></div>
+      </div>
       <div className="mx-5 max-w-7xl lg:mx-auto">
         <div className="navbar">
           <div className=" navbar-start flex-1 flex gap-4">
+            <div className="dropdown sm:hidden ">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {" "}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h7"
+                  />{" "}
+                </svg>
+              </div>
+              <ul
+                tabIndex="-1"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <a>Homepage</a>
+                </li>
+                <li>
+                  <a>Portfolio</a>
+                </li>
+                <li>
+                  <a>About</a>
+                </li>
+              </ul>
+            </div>
             <h1 className="text-2xl font-semibold">
               <span>BLOG</span>
               <span className="font-light">IFY</span>
             </h1>
             {/* search bar */}
-            <div>
-              <fieldset className="w-full space-y-1 bg-base-300 rounded-xl">
+            <div className="">
+              <fieldset className="w-full space-y-1 bg-base-300 rounded-xl shadow-md">
                 <label htmlFor="Search" className="hidden">
                   Search
                 </label>
@@ -48,9 +89,10 @@ const Navbar = () => {
           <div className="navbar-center">{/* empty */}</div>
           <div className="navbar-end flex gap-5">
             <div className="md:flex items-center gap-5 hidden ">
-                <button className="btn btn-neutral rounded-4xl flex gap-2 ">
-                  <MdOutlineSubscriptions size={20} />Go Premium
-                </button>
+              <button className="btn btn-neutral rounded-4xl flex gap-2 ">
+                <MdOutlineSubscriptions size={20} />
+                Go Premium
+              </button>
               <button className="flex items-center gap-2 text-lg text-gray-500">
                 <FaRegPenToSquare size={24} /> Write
               </button>
@@ -90,6 +132,10 @@ const Navbar = () => {
               </ul>
             </div>
           </div>
+        </div>
+        <div className="text-gray-300">
+          {" "}
+          <hr />
         </div>
       </div>
     </div>
