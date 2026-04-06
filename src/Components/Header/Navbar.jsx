@@ -38,16 +38,19 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow space-y-1"
               >
                 <li>
-                  <a>Homepage</a>
+                  <a>Notifications</a>
                 </li>
                 <li>
-                  <a>Portfolio</a>
+                  <a>About Us</a>
                 </li>
                 <li>
-                  <a>About</a>
+                  <button className=" btn btn-neutral rounded-4xl flex gap-2 ">
+                    <MdOutlineSubscriptions size={15} />
+                    Go Premium
+                  </button>
                 </li>
               </ul>
             </div>
@@ -55,8 +58,9 @@ const Navbar = () => {
               <span>BLOG</span>
               <span className="font-light">IFY</span>
             </Link>
+
             {/* search bar */}
-            <div className="">
+            <div className="hidden md:flex items-center gap-4">
               <fieldset className="w-full space-y-1  rounded-xl bg-white dark:bg-zinc-900  shadow-sm border border-gray-300 dark:border-zinc-800">
                 <label htmlFor="Search" className="hidden">
                   Search
@@ -89,6 +93,14 @@ const Navbar = () => {
           </div>
           <div className="navbar-center gap-5 "></div>
           <div className="navbar-end flex gap-5">
+            <div className="sm:hidden">
+              <Link
+                to="/write"
+                className="flex items-center gap-2 text-lg text-gray-500"
+              >
+                <FaRegPenToSquare size={24} /> Write
+              </Link>
+            </div>
             <div className="md:flex items-center gap-5 hidden ">
               <button className="btn btn-neutral rounded-4xl flex gap-2 ">
                 <MdOutlineSubscriptions size={20} />

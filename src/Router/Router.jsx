@@ -3,6 +3,9 @@ import Layout from "../Layout/Layout";
 import Home from "../Pages/Home";
 import Write from "../Pages/Write";
 import Blogs from "../Pages/Blogs";
+import DetailsCard from "../Components/CardComponent/DetailsCard";
+import UpdateBlog from "../Pages/UpdateBlog";
+import WriterPortal from "../Pages/WriterPortal";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +32,22 @@ export const router = createBrowserRouter([
           return data;
         },
         Component: Blogs,
+      },
+      {
+        path: "/details/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/blogs/${params.id}`),
+        Component: DetailsCard,
+      },
+      {
+        path: "/update/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/blogs/${params.id}`),
+        Component: UpdateBlog,
+      },
+      {
+        path: "/writerPortal",
+        Component: WriterPortal,
       },
     ],
   },

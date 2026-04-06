@@ -2,19 +2,64 @@ import React from "react";
 import { FaHeart, FaFacebookF, FaPinterestP, FaEnvelope } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { CiMenuKebab } from "react-icons/ci";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
+import Swal from "sweetalert2";
+import { Link } from "react-router";
 
-const BlogCard = ({ blog }) => {
-  const { url, title, content, category, date, likes, userName, userPhoto } =
-    blog;
+const BlogCard = ({ blog , blogs, setBlogs}) => {
+  const {
+    _id,
+    url,
+    title,
+    content,
+    category,
+    date,
+    likes,
+    userName,
+    userPhoto,
+  } = blog;
+
+  const handleDelete = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/blogs/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+
+              // remove blog from state
+
+              const remainingBlogs = blogs.filter((blog)=> blog._id !== _id)
+              setBlogs(remainingBlogs);
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div className="flex flex-col md:flex-row gap-6 bg-white border border-zinc-100 rounded-lg overflow-hidden p-6 hover:shadow-lg transition-all mb-6 shadow-md">
       {/* ১. Image Section */}
-      <div className="md:w-1/3 flex-shrink-0">
+      <div className="md:w-1/3 shrink-0">
         <img
           src={url}
           alt={title}
-          className="w-full h-full min-h-[220px] object-cover rounded-md aspect-[4/3]"
+          className="w-full h-full min-h-55 object-cover rounded-md aspect-4/3"
         />
       </div>
 
@@ -49,17 +94,23 @@ const BlogCard = ({ blog }) => {
                   </div>
                   <ul
                     tabIndex="-1"
-                    className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                    className="dropdown-content menu bg-base-100 rounded-box z-1 w-38 p-2 shadow-sm space-y-1"
                   >
                     <li>
-                      <a>Item 1</a>
+                      <Link to={`update/${_id}`} className="">
+                        <FiEdit /> Edit
+                      </Link>
                     </li>
+                    <div className="text-gray-400">
+                      <hr />
+                    </div>
                     <li>
-                      <a>Item 2</a>
+                      <button onClick={() => handleDelete(_id)} className="">
+                        <FiTrash2 /> Delete
+                      </button>
                     </li>
                   </ul>
                 </div>
-                
               </div>
             </div>
           </div>
@@ -70,11 +121,11 @@ const BlogCard = ({ blog }) => {
           </div>
 
           {/* Blog Title */}
-          <h2 className="text-xl md:text-2xl font-bold text-zinc-950 hover:text-teal-600 transition-colors leading-tight mb-3">
-            {title}
+          <h2 className="text-xl md:text-2xl font-bold text-zinc-950 hover:text-teal-600 transition-colors leading-tight mb-3 underline underline-offset-4">
+            <Link to={`/details/${_id}`}>{title}</Link>
           </h2>
 
-          <div className="w-12 h-[2px] bg-teal-600/40 mb-4"></div>
+          <div className="w-12 h-0.5 bg-teal-600/40 mb-4"></div>
 
           {/* Blog Content */}
           <p className="text-zinc-600 text-sm md:text-base leading-relaxed line-clamp-3">
@@ -90,18 +141,18 @@ const BlogCard = ({ blog }) => {
           </div>
 
           <div className="flex items-center gap-4 text-zinc-400">
-            <a href="#" className="hover:text-blue-700 transition-all">
+            <p className="hover:text-blue-700 transition-all">
               <FaFacebookF size={14} />
-            </a>
-            <a href="#" className="hover:text-black transition-all">
+            </p>
+            <p className="hover:text-black transition-all">
               <BsTwitterX size={14} />
-            </a>
-            <a href="#" className="hover:text-red-600 transition-all">
+            </p>
+            <p className="hover:text-red-600 transition-all">
               <FaPinterestP size={14} />
-            </a>
-            <a href="#" className="hover:text-teal-600 transition-all">
+            </p>
+            <p className="hover:text-teal-600 transition-all">
               <FaEnvelope size={14} />
-            </a>
+            </p>
           </div>
         </div>
       </div>
