@@ -29,6 +29,7 @@ const Write = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          form.reset();
         }
       });
   };

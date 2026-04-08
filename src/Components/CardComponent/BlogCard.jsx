@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaHeart, FaFacebookF, FaPinterestP, FaEnvelope } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { CiMenuKebab } from "react-icons/ci";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
-const BlogCard = ({ blog , blogs, setBlogs}) => {
+const BlogCard = ({ blog, blogs, setBlogs }) => {
   const {
     _id,
     url,
@@ -15,9 +16,10 @@ const BlogCard = ({ blog , blogs, setBlogs}) => {
     category,
     date,
     likes,
-    userName,
     userPhoto,
   } = blog;
+
+  const { user } = useContext(AuthContext);
 
   const handleDelete = (_id) => {
     Swal.fire({
@@ -44,13 +46,14 @@ const BlogCard = ({ blog , blogs, setBlogs}) => {
 
               // remove blog from state
 
-              const remainingBlogs = blogs.filter((blog)=> blog._id !== _id)
+              const remainingBlogs = blogs.filter((blog) => blog._id !== _id);
               setBlogs(remainingBlogs);
             }
           });
       }
     });
   };
+
 
   return (
     <div className="flex flex-col md:flex-row gap-6 bg-white border border-zinc-100 rounded-lg overflow-hidden p-6 hover:shadow-lg transition-all mb-6 shadow-md">
@@ -62,6 +65,7 @@ const BlogCard = ({ blog , blogs, setBlogs}) => {
           className="w-full h-full min-h-55 object-cover rounded-md aspect-4/3"
         />
       </div>
+      
 
       {/* ২. Content Section */}
       <div className="md:w-2/3 flex flex-col justify-between">
@@ -78,7 +82,7 @@ const BlogCard = ({ blog , blogs, setBlogs}) => {
             <div className="flex justify-between w-full">
               <div>
                 <p className="text-sm font-bold text-zinc-900 leading-none">
-                  {userName || "Imran Hossan"}{" "}
+                  { "Anonymous Writer"}{" "}
                   {/* 
                 default value added for testing, replace with actual userName from data when available
                 */}

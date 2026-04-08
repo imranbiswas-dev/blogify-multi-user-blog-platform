@@ -6,6 +6,8 @@ import Blogs from "../Pages/Blogs";
 import DetailsCard from "../Components/CardComponent/DetailsCard";
 import UpdateBlog from "../Pages/UpdateBlog";
 import WriterPortal from "../Pages/WriterPortal";
+import SignUp from "../Pages/SignUp";
+import SignIn from "../Pages/SignIn";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ export const router = createBrowserRouter([
       {
         path: "/writerPortal",
         Component: WriterPortal,
+      },
+      {
+        path: "/signUp",
+        Component: SignUp,
+      },
+      {
+        path: "/signIn",
+        Component: SignIn,
       },
     ],
   },

@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FaRegBookmark } from "react-icons/fa";
 import { FaRegPenToSquare } from "react-icons/fa6";
+import { GoSignIn } from "react-icons/go";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineSubscriptions } from "react-icons/md";
-import { Link, NavLink } from "react-router";
+import { Link, Navigate, NavLink } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
+import Swal from "sweetalert2";
+import { CiLogout } from "react-icons/ci";
 
 const Navbar = () => {
+  const { user , logOut} = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        console.log("Logged out successfully, Sir.");
+        Swal.fire({
+          icon: "info",
+          title: "Logged Out",
+          text: "See you soon, Sir!",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        Navigate("/login"); // লগআউট হওয়ার পর লগইন পেজে পাঠিয়ে দিন
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+      });
+  };
   return (
     <div className="bg-white dark:bg-zinc-950 transition-colors duration-300 sticky top-0 z-50 ">
       <div className="absolute top-0  -translate-x-1/2 w-full h-full opacity-10 dark:opacity-20 pointer-events-none">
@@ -58,7 +82,6 @@ const Navbar = () => {
               <span>BLOG</span>
               <span className="font-light">IFY</span>
             </Link>
-
             {/* search bar */}
             <div className="hidden md:flex items-center gap-4">
               <fieldset className="w-full space-y-1  rounded-xl bg-white dark:bg-zinc-900  shadow-sm border border-gray-300 dark:border-zinc-800">
@@ -101,49 +124,99 @@ const Navbar = () => {
                 <FaRegPenToSquare size={24} /> Write
               </Link>
             </div>
-            <div className="md:flex items-center gap-5 hidden ">
+            <div className="md:flex items-center gap-5 hidden text-gray-500">
               <button className="btn btn-neutral rounded-4xl flex gap-2 ">
                 <MdOutlineSubscriptions size={20} />
                 Go Premium
               </button>
-              <Link
-                to="/write"
-                className="flex items-center gap-2 text-lg text-gray-500"
-              >
+              <Link to="/write" className="flex items-center gap-2 text-lg ">
                 <FaRegPenToSquare size={24} /> Write
               </Link>
-              <p>
-                <IoMdNotificationsOutline size={24} />
-              </p>
+              <div className="tooltip tooltip-bottom" data-tip="Bookmark">
+                <FaRegBookmark size={24} />
+              </div>
+              <Link
+                to="/signIn"
+                className="tooltip tooltip-bottom"
+                data-tip="SignIn"
+              >
+                <GoSignIn size={24} />
+              </Link>
             </div>
             <div className="dropdown dropdown-end">
+              {/* ১. Avatar Button */}
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost btn-circle avatar"
+                className="relative group focus:outline-none"
               >
-                <div className="w-10 rounded-full">
+                <div className="w-11 h-11 rounded-2xl overflow-hidden border-2 border-zinc-100 dark:border-zinc-800 hover:border-indigo-500 transition-all duration-300 shadow-sm">
                   <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    className="w-full h-full object-cover"
+                    alt="User Profile"
+                    src={
+                      user?.photoURL ||
+                      "https://i.ibb.co.com/8D6S9mN/user-placeholder.png"
+                    }
                   />
                 </div>
+                {/* অনলাইন ইন্ডিকেটর */}
+                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-zinc-950 rounded-full"></span>
               </div>
+
+              {/* ২. Professional Dropdown Content */}
               <ul
-                tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                tabIndex={0}
+                className="dropdown-content menu menu-sm bg-white dark:bg-zinc-900 rounded-[1.5rem] z-[100] mt-4 w-64 p-3 shadow-2xl border border-zinc-100 dark:border-zinc-800 space-y-1"
               >
+                {/* User Info Header */}
+                <li className="px-3 py-4 mb-2 pointer-events-none">
+                  <div className="flex flex-col gap-1 p-0 bg-transparent">
+                    <p className="text-sm font-black text-zinc-900 dark:text-white truncate uppercase tracking-tighter">
+                      {user?.displayName || "Thomas Shelby"}
+                    </p>
+                    <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400 truncate">
+                      {user?.email || "user@example.com"}
+                    </p>
+                  </div>
+                </li>
+
+                <div className="border-t border-zinc-100 dark:border-zinc-800 my-1"></div>
+
+                {/* Menu Links */}
                 <li>
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-3 py-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 px-4 transition-all"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                    <span className="font-bold text-zinc-700 dark:text-zinc-200">
+                      Dashboard
+                    </span>
+                  </Link>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <Link
+                    to="/settings"
+                    className="flex items-center gap-3 py-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 px-4 transition-all"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-600"></span>
+                    <span className="font-bold text-zinc-700 dark:text-zinc-200">
+                      Settings
+                    </span>
+                  </Link>
                 </li>
+
+                <div className="border-t border-zinc-100 dark:border-zinc-800 my-1"></div>
+
+                {/* Logout Button */}
                 <li>
-                  <a>Logout</a>
+                  <button
+                    onClick={handleLogOut}
+                    className="flex items-center gap-3 py-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-500/10 px-4 text-red-500 transition-all font-black"
+                  >
+                    <span className="flex items-center gap-2"><CiLogout size={14} /> Logout</span>
+                  </button>
                 </li>
               </ul>
             </div>

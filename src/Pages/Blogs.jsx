@@ -5,7 +5,7 @@ const Blogs = ({ blogsData }) => {
   const initialBlogs = blogsData;
   const [blogs, setBlogs] = useState(initialBlogs);
   return (
-    <div className="">
+    <div className="flex flex-col-reverse">
       {blogs.map((blog) => (
         <div key={blog._id}>
           <BlogCard blog={blog} blogs={blogs} setBlogs={setBlogs} />
