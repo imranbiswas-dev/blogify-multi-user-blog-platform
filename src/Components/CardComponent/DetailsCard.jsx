@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router";
-import { FaArrowLeft, FaRegBookmark, FaShareAlt } from "react-icons/fa";
+import { FaArrowLeft, FaBookmark, FaRegBookmark, FaShareAlt } from "react-icons/fa";
+import { BookmarkContext } from "../Context/BookmarkContext";
 
 const DetailsCard = () => {
   const blog = useLoaderData();
   const navigate = useNavigate();
   
-  const { url, title, content, category, userName, userPhoto, date } = blog;
+  const { _id, url, title, content, category, userName, userPhoto, date } = blog;
+  
+  // ১. Context থেকে ডেটা এবং ফাংশন নিয়ে আসা
+  const { addBookmarks, bookmarks } = useContext(BookmarkContext);
+
+  // ২. এই ব্লগটি অলরেডি বুকমার্ক করা আছে কি না চেক করা
+  const isBookmarked = bookmarks.some((item) => item.blogId === _id);
+
+  const handleAddBookmark = () => {
+    // এখানে পুরো blog অবজেক্টটি পাঠাতে হবে
+    addBookmarks(blog);
+  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950 transition-colors duration-300 pb-20">
@@ -50,9 +62,18 @@ const DetailsCard = () => {
 
             {/* Social Actions */}
             <div className="flex items-center gap-3">
-              <button className="p-3 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-500 transition-all">
-                <FaRegBookmark size={20} />
+              {/* বুকমার্ক বাটন: স্টেট অনুযায়ী আইকন এবং কালার চেঞ্জ হবে */}
+              <button 
+                onClick={handleAddBookmark} 
+                className={`p-3 rounded-full transition-all ${
+                  isBookmarked 
+                  ? "bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600" 
+                  : "hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-500"
+                }`}
+              >
+                {isBookmarked ? <FaBookmark size={20} /> : <FaRegBookmark size={20} />}
               </button>
+
               <button className="p-3 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-500 transition-all">
                 <FaShareAlt size={20} />
               </button>
@@ -60,46 +81,42 @@ const DetailsCard = () => {
           </div>
         </div>
 
-        {/* ৪. Hero Image */}
+        {/* Hero Image */}
         <div className="mt-10 mb-12">
           <img
             src={url}
             alt={title}
-            className="w-full h-auto max-h-125 object-cover rounded-3xl shadow-2xl shadow-zinc-200 dark:shadow-none"
+            className="w-full h-auto max-h-[500px] object-cover rounded-3xl shadow-2xl shadow-zinc-200 dark:shadow-none"
             onError={(e) => {
               e.target.src = "https://placehold.co/1200x600?text=Image+Not+Available";
             }}
           />
-          <p className="text-center text-zinc-400 text-sm mt-4 italic">
-            Visual representation of {category}
-          </p>
         </div>
 
-        {/* ৫. Blog Content */}
+        {/* Blog Content */}
         <article className="prose prose-lg prose-zinc dark:prose-invert max-w-none">
           <p className="text-zinc-700 dark:text-zinc-300 leading-[1.8] text-lg md:text-xl whitespace-pre-line">
             {content}
           </p>
         </article>
 
-        {/* ৬. Newsletter / Footer (Optional) */}
-        <div className="mt-20 p-8 md:p-12 bg-zinc-50 dark:bg-zinc-900 rounded-[2.5rem] text-center space-y-4">
+        {/* Newsletter Footer */}
+        <div className="mt-20 p-8 md:p-12 bg-zinc-50 dark:bg-zinc-900 rounded-[2.5rem] text-center space-y-4 shadow-sm border border-zinc-100 dark:border-zinc-800">
           <h3 className="text-2xl font-bold text-zinc-900 dark:text-white">Enjoyed this article?</h3>
           <p className="text-zinc-500 dark:text-zinc-400 max-w-md mx-auto">
             Subscribe to our newsletter to receive more stories like this directly in your inbox.
           </p>
-          <div className="flex max-w-sm mx-auto gap-2 pt-4">
+          <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-3 pt-4">
             <input 
               type="email" 
               placeholder="Enter your email" 
-              className="flex-1 px-5 py-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 px-5 py-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
             />
-            <button className="px-6 py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold rounded-2xl">
+            <button className="px-8 py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold rounded-2xl hover:scale-105 transition-transform active:scale-95">
               Join
             </button>
           </div>
         </div>
-
       </div>
     </div>
   );

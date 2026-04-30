@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Components/Context/AuthContext";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const SignIn = () => {

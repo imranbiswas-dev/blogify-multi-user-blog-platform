@@ -8,6 +8,7 @@ import UpdateBlog from "../Pages/UpdateBlog";
 import WriterPortal from "../Pages/WriterPortal";
 import SignUp from "../Pages/SignUp";
 import SignIn from "../Pages/SignIn";
+import Bookmarks from "../Components/CardComponent/Bookmarks";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "/signIn",
         Component: SignIn,
+      },
+      {
+        path: "/bookmark",
+        Component: Bookmarks,
       },
     ],
   },

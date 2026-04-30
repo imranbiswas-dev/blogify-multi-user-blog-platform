@@ -10,16 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.2.2",
+    "@tailwindcss/vite": "^4.2.3",
     "daisyui": "^5.5.19",
     "firebase": "^12.11.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-icons": "^5.6.0",
-    "react-router": "^7.14.0",
+    "react-router": "^7.14.1",
     "react-router-dom": "^7.14.0",
     "sweetalert2": "^11.26.24",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
@@ -31,5 +31,18 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
     "vite": "^8.0.1"
-  }
+  },
+  "description": "📝 Blogify - A Modern Multi-User Blogging Platform\r Blogify is a sophisticated, full-stack blogging application designed for creators and tech enthusiasts. Built with a focus on pixel-perfect design and robust data management using MongoDB Atlas, it allows users to share their stories, engage with others, and manage their content through a personalized dashboard.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imranbiswas-dev/blogify-multi-user-blog-platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imranbiswas-dev/blogify-multi-user-blog-platform/issues"
+  },
+  "homepage": "https://github.com/imranbiswas-dev/blogify-multi-user-blog-platform#readme"
 }

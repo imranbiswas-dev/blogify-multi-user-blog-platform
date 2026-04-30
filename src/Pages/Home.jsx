@@ -1,12 +1,12 @@
 import React from "react";
 import Hero from "../Components/Header/Hero";
 import Blogs from "./Blogs";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router";
 import Aside from "../Components/CardComponent/Aside";
 
 const Home = () => {
   const blogsData = useLoaderData();
-
+  console.log(blogsData);
   return (
     <div>
       <Hero />

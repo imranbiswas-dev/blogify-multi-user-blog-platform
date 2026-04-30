@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import { FaHeart, FaFacebookF, FaPinterestP, FaEnvelope } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { CiMenuKebab } from "react-icons/ci";
@@ -19,7 +19,7 @@ const BlogCard = ({ blog, blogs, setBlogs }) => {
     userPhoto,
   } = blog;
 
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   const handleDelete = (_id) => {
     Swal.fire({

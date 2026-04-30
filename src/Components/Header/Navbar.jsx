@@ -132,9 +132,9 @@ const Navbar = () => {
               <Link to="/write" className="flex items-center gap-2 text-lg ">
                 <FaRegPenToSquare size={24} /> Write
               </Link>
-              <div className="tooltip tooltip-bottom" data-tip="Bookmark">
+              <Link to="/bookmark" className="tooltip tooltip-bottom" data-tip="Bookmark">
                 <FaRegBookmark size={24} />
-              </div>
+              </Link>
               <Link
                 to="/signIn"
                 className="tooltip tooltip-bottom"
@@ -167,7 +167,7 @@ const Navbar = () => {
               {/* ২. Professional Dropdown Content */}
               <ul
                 tabIndex={0}
-                className="dropdown-content menu menu-sm bg-white dark:bg-zinc-900 rounded-[1.5rem] z-[100] mt-4 w-64 p-3 shadow-2xl border border-zinc-100 dark:border-zinc-800 space-y-1"
+                className="dropdown-content menu menu-sm bg-white dark:bg-zinc-900 rounded-3xl z-100 mt-4 w-64 p-3 shadow-2xl border border-zinc-100 dark:border-zinc-800 space-y-1"
               >
                 {/* User Info Header */}
                 <li className="px-3 py-4 mb-2 pointer-events-none">
