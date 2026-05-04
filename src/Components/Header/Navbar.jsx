@@ -116,14 +116,22 @@ const Navbar = () => {
           </div>
           <div className="navbar-center gap-5 "></div>
           <div className="navbar-end flex gap-5">
-            <div className="sm:hidden">
-              <Link
-                to="/write"
-                className="flex items-center gap-2 text-lg text-gray-500"
-              >
-                <FaRegPenToSquare size={24} /> Write
-              </Link>
-            </div>
+            {user ? (
+              <div className="sm:hidden">
+                <Link
+                  to="/write"
+                  className="flex items-center gap-2 text-lg text-gray-500"
+                >
+                  <FaRegPenToSquare size={24} /> Write
+                </Link>
+              </div>
+            ):  <Link
+                  to="/signIn"
+                  className="tooltip tooltip-bottom"
+                  data-tip="SignIn"
+                >
+                  <GoSignIn size={24} />
+                </Link>}
             <div className="md:flex items-center gap-5 hidden text-gray-500">
               <button className="btn btn-neutral rounded-4xl flex gap-2 ">
                 <MdOutlineSubscriptions size={20} />
