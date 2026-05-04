@@ -1,24 +1,21 @@
 @import "tailwindcss";
 @plugin "../node_modules/daisyui";
 
-/* ১. স্টিকি নেভিগেশন এবং কন্টেন্টের জন্য গ্লোবাল ফিক্স */
 @layer base {
-  html, body {
-    /* স্টিকি কাজ করার জন্য ওভারফ্লো-এক্স হিডেন রাখা যাবে না যদি সেটি প্যারেন্ট হয় */
-    overflow-x: clip; 
+  html,
+  body {
+    overflow-x: clip;
     height: auto;
   }
 }
 
-/* ২. আপনার কাস্টম স্টিকি ক্লাস */
 .sticky-nav {
   position: sticky;
   top: 0;
-  z-index: 50; /* যাতে এটি অন্য কন্টেন্টের উপরে থাকে */
+  z-index: 50;
   background-color: inherit;
 }
 
-/* ৩. নো-স্ক্রলবার ইউটিলিটি (Tailwind v4 স্টাইলে) */
 @utility no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

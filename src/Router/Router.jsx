@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () => fetch("http://localhost:3000/blogs"),
+        loader: () => fetch("https://blogify-server-mrpu.onrender.com/blogs"),
         Component: Home,
       },
       {
@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
       {
         path: "/blogs",
         loader: async () => {
-          const response = await fetch("http://localhost:3000/blogs");
+          const response = await fetch("https://blogify-server-mrpu.onrender.com/blogs");
           console.log("Response status:", response.status); // 200 expected
           const data = await response.json();
           console.log("Loader data:", data); // check
@@ -39,13 +39,13 @@ export const router = createBrowserRouter([
       {
         path: "/details/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/blogs/${params.id}`),
+          fetch(`https://blogify-server-mrpu.onrender.com/blogs/${params.id}`),
         Component: DetailsCard,
       },
       {
         path: "/update/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/blogs/${params.id}`),
+          fetch(`https://blogify-server-mrpu.onrender.com/blogs/${params.id}`),
         Component: UpdateBlog,
       },
       {

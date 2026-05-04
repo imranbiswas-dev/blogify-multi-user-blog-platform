@@ -4,11 +4,8 @@ import { Link } from "react-router";
 
 const Aside = () => {
   return (
-    /* ১. sticky: এলিমেন্টটিকে স্টিকি করবে।
-      ২. top-24: নেভবার থেকে দূরত্ব।
-      ৩. self-start: এটি নিশ্চিত করে যে Aside নিজের হাইট অনুযায়ী থাকবে, গ্রিডের সমান লম্বা হবে না।
-      ৪. h-fit: কন্টেন্ট অনুযায়ী হাইট নেবে।
-    */
+    
+    
     <div className="sticky top-24 self-start h-fit space-y-6 ">
       {/* --- Advertisement Card --- */}
       <div className="relative group overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl transition-all">

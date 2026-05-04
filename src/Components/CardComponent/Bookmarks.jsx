@@ -9,7 +9,7 @@ const Bookmarks = () => {
     useContext(BookmarkContext);
   const { loading } = useContext(AuthContext);
 
-  // ✅ auth loading অথবা bookmark fetch — দুটোই check
+  
   if (loading || bookmarksLoading) return <p>Loading...</p>;
 
   return (

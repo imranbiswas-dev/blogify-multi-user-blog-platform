@@ -1,25 +1,19 @@
 // import React, { useContext } from "react";
-import { FaHeart, FaFacebookF, FaPinterestP, FaEnvelope } from "react-icons/fa";
+import { FaHeart, FaFacebookF, FaPinterestP, FaEnvelope, FaRegCopy } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { CiMenuKebab } from "react-icons/ci";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
+import { useContext } from "react";
+
+// const { user } = useContext(AuthContext);
 
 const BlogCard = ({ blog, blogs, setBlogs }) => {
-  const {
-    _id,
-    url,
-    title,
-    content,
-    category,
-    date,
-    likes,
-    userPhoto,
-  } = blog;
+  const { _id, url, title, content, category,  likes, photo, name } = blog;
 
-  // const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const handleDelete = (_id) => {
     Swal.fire({
@@ -32,7 +26,7 @@ const BlogCard = ({ blog, blogs, setBlogs }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/blogs/${_id}`, {
+        fetch(`https://blogify-server-mrpu.onrender.com/blogs/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -54,7 +48,6 @@ const BlogCard = ({ blog, blogs, setBlogs }) => {
     });
   };
 
-
   return (
     <div className="flex flex-col md:flex-row gap-6 bg-white border border-zinc-100 rounded-lg overflow-hidden p-6 hover:shadow-lg transition-all mb-6 shadow-md">
       {/* ১. Image Section */}
@@ -65,30 +58,29 @@ const BlogCard = ({ blog, blogs, setBlogs }) => {
           className="w-full h-full min-h-55 object-cover rounded-md aspect-4/3"
         />
       </div>
-      
 
       {/* ২. Content Section */}
       <div className="md:w-2/3 flex flex-col justify-between">
         <div>
+          {name}
           {/* User Profile Section (Added recently) */}
           <div className="flex items-center gap-3 mb-4">
             <img
-              src={
-                userPhoto || "https://i.ibb.co.com/8D6S9mN/user-placeholder.png"
-              }
+              src={photo || "https://i.ibb.co.com/8D6S9mN/user-placeholder.png"}
               alt="User"
               className="w-10 h-10 rounded-full object-cover border border-zinc-200"
             />
             <div className="flex justify-between w-full">
               <div>
                 <p className="text-sm font-bold text-zinc-900 leading-none">
-                  { "Anonymous Writer"}{" "}
+                  {blog.username}
+                  {/* { "Anonymous Writer"}{" "} */}
                   {/* 
                 default value added for testing, replace with actual userName from data when available
                 */}
                 </p>
-                <p className="text-[10px] text-zinc-400 mt-1 uppercase tracking-wider">
-                  {date || "April 5, 2026"}
+                <p className="text-[10px] text-zinc-400 mt-1  tracking-wider">
+                  {blog.email}
                 </p>
               </div>
               <div>
@@ -100,17 +92,47 @@ const BlogCard = ({ blog, blogs, setBlogs }) => {
                     tabIndex="-1"
                     className="dropdown-content menu bg-base-100 rounded-box z-1 w-38 p-2 shadow-sm space-y-1"
                   >
+                    {user?.email === blog.email && (
+                      <>
+                        <li>
+                          <Link to={`update/${_id}`} className="">
+                            <FiEdit /> Edit
+                          </Link>
+                        </li>
+                        <div className="text-gray-400">
+                          <hr />
+                        </div>
+                        <li>
+                          <button
+                            onClick={() => handleDelete(_id)}
+                            className=""
+                          >
+                            <FiTrash2 /> Delete
+                          </button>
+                        </li>
+                        <div className="text-gray-400">
+                          <hr />
+                        </div>
+                      </>
+                    )}
+
+                    {/* ✅ Copy Button */}
                     <li>
-                      <Link to={`update/${_id}`} className="">
-                        <FiEdit /> Edit
-                      </Link>
-                    </li>
-                    <div className="text-gray-400">
-                      <hr />
-                    </div>
-                    <li>
-                      <button onClick={() => handleDelete(_id)} className="">
-                        <FiTrash2 /> Delete
+                      <button
+                        onClick={() => {
+                          const postUrl = `${window.location.origin}/details/${_id}`;
+                          navigator.clipboard.writeText(postUrl);
+                          Swal.fire({
+                            icon: "success",
+                            title: "Copied!",
+                            text: "Post URL copied to clipboard.",
+                            timer: 1500,
+                            showConfirmButton: false,
+                          });
+                        }}
+                        className=""
+                      >
+                        <FaRegCopy /> Copy URL
                       </button>
                     </li>
                   </ul>

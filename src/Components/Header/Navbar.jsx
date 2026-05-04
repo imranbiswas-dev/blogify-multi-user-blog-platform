@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import { CiLogout } from "react-icons/ci";
 
 const Navbar = () => {
-  const { user , logOut} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   const handleLogOut = () => {
     logOut()
@@ -129,19 +129,32 @@ const Navbar = () => {
                 <MdOutlineSubscriptions size={20} />
                 Go Premium
               </button>
-              <Link to="/write" className="flex items-center gap-2 text-lg ">
-                <FaRegPenToSquare size={24} /> Write
-              </Link>
-              <Link to="/bookmark" className="tooltip tooltip-bottom" data-tip="Bookmark">
-                <FaRegBookmark size={24} />
-              </Link>
-              <Link
-                to="/signIn"
-                className="tooltip tooltip-bottom"
-                data-tip="SignIn"
-              >
-                <GoSignIn size={24} />
-              </Link>
+
+              {user ? (
+                <div className="flex gap-4 items-center">
+                  <Link
+                    to="/write"
+                    className="flex items-center gap-2 text-lg "
+                  >
+                    <FaRegPenToSquare size={24} /> Write
+                  </Link>
+                  <Link
+                    to="/bookmark"
+                    className="tooltip tooltip-bottom"
+                    data-tip="Bookmark"
+                  >
+                    <FaRegBookmark size={24} />
+                  </Link>
+                </div>
+              ) : (
+                <Link
+                  to="/signIn"
+                  className="tooltip tooltip-bottom"
+                  data-tip="SignIn"
+                >
+                  <GoSignIn size={24} />
+                </Link>
+              )}
             </div>
             <div className="dropdown dropdown-end">
               {/* ১. Avatar Button */}
@@ -186,12 +199,12 @@ const Navbar = () => {
                 {/* Menu Links */}
                 <li>
                   <Link
-                    to="/profile"
+                    to="/bookmark"
                     className="flex items-center gap-3 py-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 px-4 transition-all"
                   >
                     <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
                     <span className="font-bold text-zinc-700 dark:text-zinc-200">
-                      Dashboard
+                      Bookmark
                     </span>
                   </Link>
                 </li>
@@ -215,7 +228,9 @@ const Navbar = () => {
                     onClick={handleLogOut}
                     className="flex items-center gap-3 py-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-500/10 px-4 text-red-500 transition-all font-black"
                   >
-                    <span className="flex items-center gap-2"><CiLogout size={14} /> Logout</span>
+                    <span className="flex items-center gap-2">
+                      <CiLogout size={14} /> Logout
+                    </span>
                   </button>
                 </li>
               </ul>

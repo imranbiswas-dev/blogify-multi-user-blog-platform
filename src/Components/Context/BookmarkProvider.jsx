@@ -6,13 +6,13 @@ import Swal from "sweetalert2";
 const BookmarkProvider = ({ children }) => {
   const { user, loading } = useContext(AuthContext) || {};
   const [bookmarks, setBookmarks] = useState([]);
-  const [bookmarksLoading, setBookmarksLoading] = useState(true); // ✅ নতুন
+  const [bookmarksLoading, setBookmarksLoading] = useState(true); 
 
   useEffect(() => {
-    // ✅ Firebase এখনো ready না → কিছু করবো না
+  
     if (loading) return;
 
-    // ✅ User নেই → clear করো
+   
     if (!user?.email) {
       setBookmarks([]);
       setBookmarksLoading(false);
@@ -22,7 +22,7 @@ const BookmarkProvider = ({ children }) => {
     let ignore = false;
     setBookmarksLoading(true);
 
-    fetch(`http://localhost:3000/bookmarks?userEmail=${user.email}`)
+    fetch(`https://blogify-server-mrpu.onrender.com/bookmarks?userEmail=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         if (!ignore) {
@@ -39,7 +39,7 @@ const BookmarkProvider = ({ children }) => {
     return () => {
       ignore = true;
     };
-  }, [user?.email, loading]); // ✅ loading dependency-তে আছে
+  }, [user?.email, loading]); 
 
   const addBookmarks = (blog) => {
     if (!user) {
@@ -59,7 +59,7 @@ const BookmarkProvider = ({ children }) => {
       userName: blog.userName,
     };
 
-    fetch("http://localhost:3000/bookmarks", {
+    fetch("https://blogify-server-mrpu.onrender.com/bookmarks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookmarkData),
@@ -88,9 +88,9 @@ const BookmarkProvider = ({ children }) => {
       });
   };
 
-  // ✅ removeFromBookmark যোগ করা হয়েছে
+  
   const removeFromBookmark = (id) => {
-    fetch(`http://localhost:3000/bookmarks/${id}`, {
+    fetch(`https://blogify-server-mrpu.onrender.com/bookmarks/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

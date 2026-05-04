@@ -7,16 +7,16 @@ const DetailsCard = () => {
   const blog = useLoaderData();
   const navigate = useNavigate();
   
-  const { _id, url, title, content, category, userName, userPhoto, date } = blog;
+  const { _id, url, title, content, category, username, photo, email } = blog;
   
-  // ১. Context থেকে ডেটা এবং ফাংশন নিয়ে আসা
+  
   const { addBookmarks, bookmarks } = useContext(BookmarkContext);
 
-  // ২. এই ব্লগটি অলরেডি বুকমার্ক করা আছে কি না চেক করা
+
   const isBookmarked = bookmarks.some((item) => item.blogId === _id);
 
   const handleAddBookmark = () => {
-    // এখানে পুরো blog অবজেক্টটি পাঠাতে হবে
+  
     addBookmarks(blog);
   };
 
@@ -46,23 +46,23 @@ const DetailsCard = () => {
           <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-y border-zinc-100 dark:border-zinc-900">
             <div className="flex items-center gap-4">
               <img
-                src={userPhoto || "https://ui-avatars.com/api/?name=" + (userName || "User")}
-                alt={userName}
+                src={photo || "https://ui-avatars.com/api/?name=" + (username || "User")}
+                alt={username}
                 className="w-14 h-14 rounded-full object-cover border-2 border-indigo-100 dark:border-zinc-800"
               />
               <div>
                 <p className="text-lg font-bold text-zinc-900 dark:text-zinc-100 leading-none mb-1">
-                  {userName || "Imran Hossan"}
+                  {username || ""}
                 </p>
                 <p className="text-sm text-zinc-500">
-                  {date || "Published on April 6, 2026"} • 5 min read
+                  {email || "Published on April 6, 2026"} • 5 min read
                 </p>
               </div>
             </div>
 
             {/* Social Actions */}
             <div className="flex items-center gap-3">
-              {/* বুকমার্ক বাটন: স্টেট অনুযায়ী আইকন এবং কালার চেঞ্জ হবে */}
+             
               <button 
                 onClick={handleAddBookmark} 
                 className={`p-3 rounded-full transition-all ${

@@ -32,7 +32,7 @@ const Hero = () => {
     <section className=" bg-white dark:bg-zinc-950 text-gray-900 dark:text-zinc-100 py-10 md:py-14 relative transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         
-        {/* ==================== LEFT SIDE - TEXT ==================== */}
+        {/* === LEFT SIDE - TEXT === */}
         <div className="space-y-8 ">
           <div className="inline-flex items-center gap-2 px-5 py-2 bg-white dark:bg-zinc-900 rounded-full shadow-sm border border-gray-100 dark:border-zinc-800">
             <span className="text-emerald-600">✦</span>
@@ -76,8 +76,8 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* ==================== RIGHT SIDE - SLIDER (Mobile) & GRID (Desktop) ==================== */}
-        {/* 'flex overflow-x-auto' মোবাইলে স্লাইডার তৈরি করবে, আর 'lg:grid' বড় স্ক্রিনে আগের মতো হয়ে যাবে */}
+        {/* === RIGHT SIDE - SLIDER (Mobile) & GRID (Desktop) ===*/}
+        
         <div className="flex overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar gap-6 md:grid md:grid-cols-2 lg:overflow-visible lg:pb-0">
           
           {cards.map((card, index) => (

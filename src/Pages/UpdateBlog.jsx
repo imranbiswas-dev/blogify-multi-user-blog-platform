@@ -14,7 +14,7 @@ const UpdateBlog = () => {
     const formData = new FormData(form);
     const updatedBlog = Object.fromEntries(formData.entries());
 
-    fetch(`http://localhost:3000/blogs/${blogs._id}`, {
+    fetch(`https://blogify-server-mrpu.onrender.com/blogs/${blogs._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

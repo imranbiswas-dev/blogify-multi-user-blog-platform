@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaCloudUploadAlt, FaHashtag, FaParagraph } from "react-icons/fa";
 import { MdOutlineCategory } from "react-icons/md";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Components/Context/AuthContext";
 
 const Write = () => {
+  const { user } = useContext(AuthContext);
   const handlePublishPost = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const newBlog = Object.fromEntries(formData.entries());
+    const blogData = Object.fromEntries(formData.entries());
+
+    const newBlog = {
+      ...blogData,
+      email: user?.email,
+      username: user?.displayName,
+      photo: user?.photoURL,
+    };
 
     // ===  send blogs data to database ===
-    fetch("http://localhost:3000/blogs", {
+    fetch("https://blogify-server-mrpu.onrender.com/blogs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

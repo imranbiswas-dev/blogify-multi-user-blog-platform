@@ -9,7 +9,7 @@ import {
   FaLink,
   FaLock,
 } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
@@ -37,7 +37,7 @@ const SignUp = () => {
             console.log("Firebase Profile Updated");
 
             // === ২. Save User in DB ===
-            fetch("http://localhost:3000/users", {
+            fetch("https://blogify-server-mrpu.onrender.com/users", {
               method: "POST",
               headers: { "content-type": "application/json" },
               body: JSON.stringify(userProfile),
